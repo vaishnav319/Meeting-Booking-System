@@ -1,0 +1,55 @@
+import {
+  CLEAR_PROFILE,
+  GET_PROFILE,
+  GET_STUDENT_PROFILES,
+  GET_MENTOR_PROFILES,
+  PROFILE_ERROR,
+  UPDATE_PROFILE,
+} from '../actions/types';
+
+const initialState = {
+  profile: null,
+  studentProfiles: [],
+  mentorProfiles: [],
+  loading: true,
+  error: {},
+};
+
+export default function (state = initialState, action) {
+  const { type, payload } = action;
+  switch (type) {
+    case GET_PROFILE:
+    case UPDATE_PROFILE:
+      return {
+        ...state,
+        profile: payload,
+        loading: false,
+      };
+    case GET_STUDENT_PROFILES:
+      return {
+        ...state,
+        studentProfiles: payload,
+        loading: false,
+      };
+    case GET_MENTOR_PROFILES:
+      return {
+        ...state,
+        mentorProfiles: payload,
+        loading: false,
+      };
+    case PROFILE_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false,
+      };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
